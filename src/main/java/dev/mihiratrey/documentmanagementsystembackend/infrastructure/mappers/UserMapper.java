@@ -1,0 +1,26 @@
+package dev.mihiratrey.documentmanagementsystembackend.infrastructure.mappers;
+
+import dev.mihiratrey.documentmanagementsystembackend.domain.models.User;
+import dev.mihiratrey.documentmanagementsystembackend.infrastructure.entities.UserEntity;
+
+import java.util.Optional;
+
+public class UserMapper {
+    public static User toDomain(UserEntity userEntity) {
+        return new User(userEntity.getUserId(), userEntity.getEmail(), userEntity.getPwdHash(), 
+                userEntity.getName(), userEntity.getContactNo(), userEntity.getRole());
+    }
+    
+    public static Optional<User> toDomain(Optional<UserEntity> userEntityOptional) {
+        return userEntityOptional.map(UserMapper::toDomain);
+    }
+    
+    public static UserEntity toEntity(User user) {
+        return new UserEntity(user.userId(), user.email(), user.pwdHash(), user.name(), 
+                user.contactNo(), user.role());
+    }
+    
+    public static Optional<UserEntity> toEntity(Optional<User> userOptional) {
+        return userOptional.map(UserMapper::toEntity);
+    }
+}
