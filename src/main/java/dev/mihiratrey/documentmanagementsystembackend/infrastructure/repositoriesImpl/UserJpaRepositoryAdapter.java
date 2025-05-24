@@ -5,9 +5,11 @@ import dev.mihiratrey.documentmanagementsystembackend.domain.exceptions.UserNotF
 import dev.mihiratrey.documentmanagementsystembackend.domain.models.User;
 import dev.mihiratrey.documentmanagementsystembackend.infrastructure.entities.UserEntity;
 import dev.mihiratrey.documentmanagementsystembackend.infrastructure.mappers.UserMapper;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+@Repository
 public class UserJpaRepositoryAdapter implements IUserRepository {
     
     private final UserJpaRepository userJpaRepository;

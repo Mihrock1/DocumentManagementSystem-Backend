@@ -18,6 +18,7 @@ public class UserEntity {
     private String name;
     private String contactNo;
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private UserType role;
     
     public UserEntity() {}
@@ -29,5 +30,29 @@ public class UserEntity {
         this.name = name;
         this.contactNo = contactNo;
         this.role = role;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPwdHash() {
+        return pwdHash;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getContactNo() {
+        return contactNo;
+    }
+
+    public UserType getRole() {
+        return role;
     }
 }

@@ -16,8 +16,8 @@ public class UserMapper {
     }
     
     public static UserEntity toEntity(User user) {
-        return new UserEntity(user.userId(), user.email(), user.pwdHash(), user.name(), 
-                user.contactNo(), user.role());
+        return new UserEntity(user.getUserId(), user.getEmail(), user.getPwdHash(), user.getName(), 
+                user.getContactNo(), user.getRole());
     }
     
     public static Optional<UserEntity> toEntity(Optional<User> userOptional) {
