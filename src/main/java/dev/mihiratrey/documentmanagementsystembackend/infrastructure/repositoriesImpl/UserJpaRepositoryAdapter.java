@@ -4,7 +4,7 @@ import dev.mihiratrey.documentmanagementsystembackend.application.repositories.I
 import dev.mihiratrey.documentmanagementsystembackend.domain.exceptions.UserNotFoundException;
 import dev.mihiratrey.documentmanagementsystembackend.domain.models.User;
 import dev.mihiratrey.documentmanagementsystembackend.infrastructure.entities.UserEntity;
-import dev.mihiratrey.documentmanagementsystembackend.infrastructure.mappers.UserMapper;
+import dev.mihiratrey.documentmanagementsystembackend.infrastructure.mappers.UserEntityMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -22,14 +22,14 @@ public class UserJpaRepositoryAdapter implements IUserRepository {
     public Optional<User> findByUserId(Integer userId) {
         Optional<UserEntity> userEntityOptional = userJpaRepository.findByUserId(userId);
         
-        return UserMapper.toDomain(userEntityOptional);
+        return UserEntityMapper.toDomain(userEntityOptional);
     }
 
     @Override
     public Optional<User> findByEmail(String email) {
         Optional<UserEntity> userEntityOptional = userJpaRepository.findByEmail(email);
         
-        return UserMapper.toDomain(userEntityOptional);
+        return UserEntityMapper.toDomain(userEntityOptional);
     }
 
     @Override
@@ -46,18 +46,18 @@ public class UserJpaRepositoryAdapter implements IUserRepository {
 
     @Override
     public User save(User user) {
-        UserEntity userEntity = UserMapper.toEntity(user);
+        UserEntity userEntity = UserEntityMapper.toEntity(user);
         userEntity = userJpaRepository.save(userEntity);
         
-        return UserMapper.toDomain(userEntity);
+        return UserEntityMapper.toDomain(userEntity);
     }
 
     @Override
     public User update(User user) {
-        UserEntity userEntity = UserMapper.toEntity(user);
+        UserEntity userEntity = UserEntityMapper.toEntity(user);
         userEntity = userJpaRepository.save(userEntity);
 
-        return UserMapper.toDomain(userEntity);
+        return UserEntityMapper.toDomain(userEntity);
     }
 
     @Override

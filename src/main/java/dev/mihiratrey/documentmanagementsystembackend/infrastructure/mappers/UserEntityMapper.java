@@ -5,14 +5,14 @@ import dev.mihiratrey.documentmanagementsystembackend.infrastructure.entities.Us
 
 import java.util.Optional;
 
-public class UserMapper {
+public class UserEntityMapper {
     public static User toDomain(UserEntity userEntity) {
         return new User(userEntity.getUserId(), userEntity.getEmail(), userEntity.getPwdHash(), 
                 userEntity.getName(), userEntity.getContactNo(), userEntity.getRole());
     }
     
     public static Optional<User> toDomain(Optional<UserEntity> userEntityOptional) {
-        return userEntityOptional.map(UserMapper::toDomain);
+        return userEntityOptional.map(UserEntityMapper::toDomain);
     }
     
     public static UserEntity toEntity(User user) {
@@ -21,6 +21,6 @@ public class UserMapper {
     }
     
     public static Optional<UserEntity> toEntity(Optional<User> userOptional) {
-        return userOptional.map(UserMapper::toEntity);
+        return userOptional.map(UserEntityMapper::toEntity);
     }
 }
