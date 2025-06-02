@@ -1,7 +1,6 @@
 package dev.mihiratrey.documentmanagementsystembackend.infrastructure.security;
 
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
@@ -17,13 +16,12 @@ public class JwtUtil {
     @Value("${jwt.secret}")
     private String secret;
     private SecretKey key;
-
-//    SecretKey secretKey = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
     
     @PostConstruct
     public void init() {
         byte[] decodedSecret = Decoders.BASE64.decode(secret);
         this.key = Keys.hmacShaKeyFor(decodedSecret);
+        System.out.println(key);
     }
     
     private final long expirationMs = 3600000;
@@ -51,7 +49,7 @@ public class JwtUtil {
     }
     
     public boolean isValid(UserDetails userDetails, String token) {
-        final String username = extractUsername(userDetails.getUsername());
+        final String username = extractUsername(token);
         
         return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
     }

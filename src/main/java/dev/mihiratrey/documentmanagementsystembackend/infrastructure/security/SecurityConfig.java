@@ -56,7 +56,7 @@ public class SecurityConfig {
                 .headers(headers ->
                         headers.frameOptions(frameOptions -> frameOptions.sameOrigin())
                 )
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/api/auth/**", "/h2-console/**", "/swagger-ui/**").permitAll()
+                .authorizeHttpRequests(auth -> auth.requestMatchers("/api/auth/**", "/api/user/create", "/dev/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider())
