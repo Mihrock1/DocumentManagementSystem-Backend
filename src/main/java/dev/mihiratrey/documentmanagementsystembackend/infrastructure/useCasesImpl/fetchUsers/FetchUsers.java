@@ -5,6 +5,7 @@ import dev.mihiratrey.documentmanagementsystembackend.application.useCases.fetch
 import dev.mihiratrey.documentmanagementsystembackend.application.useCases.fetchUsers.IFetchUsers;
 import dev.mihiratrey.documentmanagementsystembackend.domain.exceptions.UserNotFoundException;
 import dev.mihiratrey.documentmanagementsystembackend.domain.models.User;
+import dev.mihiratrey.documentmanagementsystembackend.infrastructure.mappers.UserEntityMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,6 +34,13 @@ public class FetchUsers implements IFetchUsers {
 
     @Override
     public List<FetchUsersOutput> fetchAllUsers() {
-        return List.of();
+        
+        List<User> allUsers = userRepository.findAllUsers();
+        
+        List<FetchUsersOutput> allUsersOutput = allUsers.stream().map(user -> 
+            new FetchUsersOutput(user.getUserId(), user.getEmail(), user.getName(), user.getContactNo(), user.getRole())
+        ).toList();
+        
+        return allUsersOutput;
     }
 }

@@ -13,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/user")
@@ -38,13 +39,21 @@ public class UserController {
 
     @SecurityRequirement(name = "bearerAuth")
     @GetMapping()
-    @PreAuthorize("hasRoles('ADMIN', 'NORMAL')")
     public ResponseEntity<FetchUsersOutput> fetchUserByEmail(Authentication auth) {
-        String email = auth.getName();
         
+        String email = auth.getName();
         FetchUsersOutput fetchUsersOutput = fetchUsersService.fetchSingleUserByEmail(email);
-//        URI location = URI.create("/api/user/" + fetchUsersOutput.getUserId());
         
         return ResponseEntity.ok(fetchUsersOutput);
+    }
+
+    @SecurityRequirement(name = "bearerAuth")
+    @GetMapping("/allusers")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<List<FetchUsersOutput>> fetchAllUsers() {
+        
+        List<FetchUsersOutput> allUsers = fetchUsersService.fetchAllUsers();
+        
+        return ResponseEntity.ok(allUsers);
     }
 }

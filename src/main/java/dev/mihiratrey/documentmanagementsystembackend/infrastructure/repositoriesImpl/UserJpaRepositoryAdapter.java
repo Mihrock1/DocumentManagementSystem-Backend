@@ -7,6 +7,7 @@ import dev.mihiratrey.documentmanagementsystembackend.infrastructure.entities.Us
 import dev.mihiratrey.documentmanagementsystembackend.infrastructure.mappers.UserEntityMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -30,6 +31,15 @@ public class UserJpaRepositoryAdapter implements IUserRepository {
         Optional<UserEntity> userEntityOptional = userJpaRepository.findByEmail(email);
         
         return UserEntityMapper.toDomain(userEntityOptional);
+    }
+
+    @Override
+    public List<User> findAllUsers() {
+        
+        List<UserEntity> allUsersEntity = userJpaRepository.findAll();
+        List<User> allUsers = allUsersEntity.stream().map(UserEntityMapper::toDomain).toList();
+        
+        return allUsers;
     }
 
     @Override

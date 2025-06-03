@@ -2,6 +2,7 @@ package dev.mihiratrey.documentmanagementsystembackend.application.repositories;
 
 import dev.mihiratrey.documentmanagementsystembackend.domain.models.User;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface IUserRepository {
@@ -9,6 +10,8 @@ public interface IUserRepository {
     Optional<User> findByUserId(Integer userId);
     
     Optional<User> findByEmail(String email);
+    
+    List<User> findAllUsers();
     
     Boolean existsByUserId(Integer userId);
     
