@@ -15,7 +15,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Map<String, Object>> handleValidationException(ValidationExceptionBase ex) {
         Map<String, Object> body = Map.of(
             "error", ex.getMessage(),
-            "type", ex.getClass().getSimpleName(),  // <- This gives "ApplicationValidationException", etc.
+            "type", ex.getClass().getSimpleName(),
             "timestamp", LocalDateTime.now()
         );
         

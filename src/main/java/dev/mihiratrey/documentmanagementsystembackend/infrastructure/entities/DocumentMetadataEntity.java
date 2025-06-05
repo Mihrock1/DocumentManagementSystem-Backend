@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -27,7 +29,7 @@ public class DocumentMetadataEntity {
     private UserEntity uploadedBy;
     
     @Column(nullable = false)
-    private String uploadTime;
+    private Date uploadTime;
     
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
