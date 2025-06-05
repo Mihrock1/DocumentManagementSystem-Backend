@@ -1,27 +1,32 @@
 package dev.mihiratrey.documentmanagementsystembackend.infrastructure.entities;
 
-import dev.mihiratrey.documentmanagementsystembackend.domain.enums.UserType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Entity
-public class UserEntity {
+public class CategoryEntity {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Integer userId;
-    @Column(unique = true, nullable = false)
-    private String email;
+    private Integer categoryId;
+    
     @Column(nullable = false)
-    private String pwdHash;
+    private String categoryName;
+    
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "created_by", referencedColumnName = "user_id", nullable = false)
+    private UserEntity createdBy;
+    
     @Column(nullable = false)
-    private String name;
-    private String contactNo;
+    private Date createdAt;
+    
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private UserType role;
+    private Boolean isDeleted;
 }

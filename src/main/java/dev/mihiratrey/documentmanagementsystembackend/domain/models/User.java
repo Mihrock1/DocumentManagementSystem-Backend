@@ -57,6 +57,4 @@ public class User {
     public UserType getRole() {
         return role;
     }
-    
-    
 }
