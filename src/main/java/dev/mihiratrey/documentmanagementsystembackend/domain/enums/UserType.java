@@ -16,7 +16,7 @@ public enum UserType {
         }
     }
     
-    public List<String> getUserRoles() {
+    public static List<String> getUserRoles() {
         return Arrays.stream(UserType.values())
                 .map(role -> "ROLE_" + role.name())
                 .toList();
